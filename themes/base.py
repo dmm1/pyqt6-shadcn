@@ -95,6 +95,12 @@ class ShadcnTheme(Theme):
         /* Main window background */
         QMainWindow, QWidget#MainWindow {{
             background-color: {colors.get('background', '#ffffff')};
+            color: {colors.get('foreground', '#0f172a')};
+        }}
+
+        /* Try to affect window frame */
+        QMainWindow {{
+            background-color: {colors.get('background', '#ffffff')};
         }}
 
         /* Buttons */
@@ -354,5 +360,36 @@ class ShadcnTheme(Theme):
 
         QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
             background: none;
+        }}
+
+        /* Custom title bar */
+        QWidget#title_bar {{
+            background-color: {colors.get('background', '#ffffff')};
+            border-bottom: 1px solid {colors.get('border', '#e2e8f0')};
+        }}
+
+        QPushButton#title_bar_button {{
+            background-color: transparent;
+            border: none;
+            color: {colors.get('foreground', '#0f172a')};
+            font-size: 14px;
+            font-weight: bold;
+        }}
+
+        QPushButton#title_bar_button:hover {{
+            background-color: {colors.get('muted', '#f1f5f9')};
+        }}
+
+        QPushButton#close_button {{
+            background-color: transparent;
+            border: none;
+            color: {colors.get('foreground', '#0f172a')};
+            font-size: 14px;
+            font-weight: bold;
+        }}
+
+        QPushButton#close_button:hover {{
+            background-color: {colors.get('destructive', '#ef4444')};
+            color: {colors.get('destructive-foreground', '#ffffff')};
         }}
         """

@@ -16,8 +16,10 @@ from PyQt6.QtWidgets import (
     QRadioButton,
     QComboBox,
     QSlider,
+    QPushButton,
+    QSizePolicy,
 )
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtGui import QFont
 
 # Import our modular components
@@ -32,20 +34,128 @@ from widgets import (
 )
 
 
+class CustomTitleBar(QWidget):
+    """Custom title bar widget that matches the theme"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.parent_window = parent
+        self.drag_start_position = None
+        self.setFixedHeight(40)
+        self.setObjectName("title_bar")
+        self.setup_ui()
+
+    def setup_ui(self):
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(12, 0, 12, 0)
+        layout.setSpacing(8)
+
+        # Window title
+        self.title_label = ShadcnLabel("Shadcn-inspired PyQt6 GUI", "heading")
+        size_policy = self.title_label.sizePolicy()
+        size_policy.setHorizontalPolicy(QSizePolicy.Policy.Expanding)
+        size_policy.setVerticalPolicy(QSizePolicy.Policy.Preferred)
+        self.title_label.setSizePolicy(size_policy)
+
+        # Window controls
+        controls_layout = QHBoxLayout()
+        controls_layout.setSpacing(0)
+
+        # Minimize button
+        self.minimize_btn = QPushButton("—")
+        self.minimize_btn.setFixedSize(40, 30)
+        self.minimize_btn.setObjectName("title_bar_button")
+        self.minimize_btn.clicked.connect(self.minimize_window)
+
+        # Maximize button
+        self.maximize_btn = QPushButton("⬜")
+        self.maximize_btn.setFixedSize(40, 30)
+        self.maximize_btn.setObjectName("title_bar_button")
+        self.maximize_btn.clicked.connect(self.toggle_maximize)
+
+        # Close button
+        self.close_btn = QPushButton("✕")
+        self.close_btn.setFixedSize(40, 30)
+        self.close_btn.setObjectName("close_button")
+        self.close_btn.clicked.connect(self.close_window)
+
+        controls_layout.addWidget(self.minimize_btn)
+        controls_layout.addWidget(self.maximize_btn)
+        controls_layout.addWidget(self.close_btn)
+
+        layout.addWidget(self.title_label)
+        layout.addLayout(controls_layout)
+
+    def minimize_window(self):
+        if self.parent_window:
+            self.parent_window.showMinimized()
+
+    def toggle_maximize(self):
+        if self.parent_window:
+            if self.parent_window.isMaximized():
+                self.parent_window.showNormal()
+                self.maximize_btn.setText("⬜")
+            else:
+                self.parent_window.showMaximized()
+                self.maximize_btn.setText("❐")
+
+    def close_window(self):
+        if self.parent_window:
+            self.parent_window.close()
+
+    def mousePressEvent(self, a0):
+        if a0 and a0.button() == Qt.MouseButton.LeftButton and self.parent_window:
+            self.drag_start_position = (
+                a0.globalPosition().toPoint()
+                - self.parent_window.frameGeometry().topLeft()
+            )
+            a0.accept()
+
+    def mouseMoveEvent(self, a0):
+        if (
+            a0
+            and a0.buttons() & Qt.MouseButton.LeftButton
+            and self.drag_start_position is not None
+            and self.parent_window
+            and not self.parent_window.isMaximized()
+        ):
+            new_pos = a0.globalPosition().toPoint() - self.drag_start_position
+            self.parent_window.move(new_pos)
+            a0.accept()
+
+
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
+        # Make window frameless and add custom title bar
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.Window)
         self.setWindowTitle("Shadcn-inspired PyQt6 GUI")
-        self.setMinimumSize(800, 700)  # Increased minimum height
-        self.resize(900, 800)  # Set a reasonable default size
-        self.setObjectName("MainWindow")  # Add object name for specific styling
+        self.setMinimumSize(800, 700)
+        self.resize(900, 800)
+        self.setObjectName("MainWindow")
+
+        # Create main layout
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
+
+        # Add custom title bar
+        self.title_bar = CustomTitleBar(self)
+        self.main_layout.addWidget(self.title_bar)
+
+        # Create content widget
+        self.content_widget = QWidget()
+        self.content_layout = QVBoxLayout(self.content_widget)
+        self.content_layout.setSpacing(16)
+        self.content_layout.setContentsMargins(20, 20, 20, 20)
+
+        self.main_layout.addWidget(self.content_widget)
+
         self.setup_ui()
         self.apply_styles()
 
     def setup_ui(self):
-        layout = QVBoxLayout(self)
-        layout.setSpacing(16)
-        layout.setContentsMargins(20, 20, 20, 20)
+        layout = self.content_layout  # Use content layout instead of main layout
 
         # Header
         header_card = ShadcnCard()
@@ -202,6 +312,11 @@ class MainWindow(QWidget):
             child.update()
             child.repaint()
 
+        # Also refresh title bar
+        if hasattr(self, "title_bar"):
+            self.title_bar.update()
+            self.title_bar.repaint()
+
     def update_progress(self, value):
         self.progress_bar.setValue(value)
 
@@ -237,7 +352,12 @@ class MainWindow(QWidget):
 
 
 def main():
+    import os  # noqa: F401
+
     app = QApplication(sys.argv)
+
+    # Try to set a style that supports theming
+    app.setStyle("Fusion")
 
     # Set application-wide font
     font = QFont("Segoe UI", 10)

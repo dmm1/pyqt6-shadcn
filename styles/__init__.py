@@ -4,6 +4,7 @@ Style manager for applying themes to PyQt6 applications
 
 from typing import Optional
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QPalette, QColor
 from themes import ThemeManager
 from themes import Theme
 
@@ -29,6 +30,51 @@ class StyleManager:
                 self.theme_manager.is_dark_mode
             )
             self._app.setStyleSheet(stylesheet)
+
+            # Also set the application palette for window frame theming
+            self._apply_palette()
+
+    def _apply_palette(self):
+        """Apply the current theme colors to the application palette"""
+        if not self._app:
+            return
+
+        theme = self.theme_manager.current_theme
+        colors = theme.get_colors_for_mode(self.theme_manager.is_dark_mode)
+
+        palette = self._app.palette()
+
+        # Set window colors (affects title bar on some platforms)
+        if "background" in colors:
+            palette.setColor(QPalette.ColorRole.Window, QColor(colors["background"]))
+        if "foreground" in colors:
+            palette.setColor(
+                QPalette.ColorRole.WindowText, QColor(colors["foreground"])
+            )
+
+        # Set base colors
+        if "background" in colors:
+            palette.setColor(QPalette.ColorRole.Base, QColor(colors["background"]))
+        if "foreground" in colors:
+            palette.setColor(QPalette.ColorRole.Text, QColor(colors["foreground"]))
+
+        # Set button colors
+        if "secondary" in colors:
+            palette.setColor(QPalette.ColorRole.Button, QColor(colors["secondary"]))
+        if "secondary-foreground" in colors:
+            palette.setColor(
+                QPalette.ColorRole.ButtonText, QColor(colors["secondary-foreground"])
+            )
+
+        # Set highlight colors
+        if "primary" in colors:
+            palette.setColor(QPalette.ColorRole.Highlight, QColor(colors["primary"]))
+        if "primary-foreground" in colors:
+            palette.setColor(
+                QPalette.ColorRole.HighlightedText, QColor(colors["primary-foreground"])
+            )
+
+        self._app.setPalette(palette)
 
     def get_current_theme(self) -> Theme:
         """Get the current theme"""
