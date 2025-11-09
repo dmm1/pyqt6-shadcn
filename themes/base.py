@@ -88,8 +88,6 @@ class ShadcnTheme(Theme):
         return f"""
         /* Global styles */
         QWidget {{
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-size: 14px;
             color: {colors.get('foreground', '#0f172a')};
             background-color: {colors.get('background', '#ffffff')};
         }}
@@ -119,46 +117,46 @@ class ShadcnTheme(Theme):
             background-color: {colors.get('border', '#e2e8f0')};
         }}
 
-        QPushButton[class="primary"] {{
+        QPushButton#primary {{
             background-color: {colors.get('primary', '#0f172a')};
             border-color: {colors.get('primary', '#0f172a')};
             color: {colors.get('primary-foreground', '#ffffff')};
         }}
 
-        QPushButton[class="primary"]:hover {{
+        QPushButton#primary:hover {{
             background-color: {colors.get('primary', '#1e293b')};
             border-color: {colors.get('primary', '#1e293b')};
         }}
 
-        QPushButton[class="secondary"] {{
+        QPushButton#secondary {{
             background-color: {colors.get('secondary', '#f1f5f9')};
             border-color: {colors.get('border', '#e2e8f0')};
             color: {colors.get('secondary-foreground', '#475569')};
         }}
 
-        QPushButton[class="secondary"]:hover {{
+        QPushButton#secondary:hover {{
             background-color: {colors.get('muted', '#e2e8f0')};
             border-color: {colors.get('border', '#cbd5e1')};
         }}
 
-        QPushButton[class="outline"] {{
+        QPushButton#outline {{
             background-color: transparent;
             border: 1px solid {colors.get('border', '#e2e8f0')};
             color: {colors.get('foreground', '#475569')};
         }}
 
-        QPushButton[class="outline"]:hover {{
+        QPushButton#outline:hover {{
             background-color: {colors.get('background', '#f8fafc')};
             border-color: {colors.get('border', '#cbd5e1')};
         }}
 
-        QPushButton[class="ghost"] {{
+        QPushButton#ghost {{
             background-color: transparent;
             border: none;
             color: {colors.get('foreground', '#475569')};
         }}
 
-        QPushButton[class="ghost"]:hover {{
+        QPushButton#ghost:hover {{
             background-color: {colors.get('muted', '#f1f5f9')};
         }}
 
@@ -166,7 +164,7 @@ class ShadcnTheme(Theme):
         QLineEdit, QTextEdit {{
             background-color: {colors.get('background', '#ffffff')};
             border: 1px solid {colors.get('border', '#e2e8f0')};
-            border-radius: 6px;
+            border
             padding: 8px 12px;
             font-size: 14px;
             color: {colors.get('foreground', '#0f172a')};
@@ -187,14 +185,14 @@ class ShadcnTheme(Theme):
             font-size: 14px;
         }}
 
-        QLabel[class="heading"] {{
+        QLabel#heading {{
             font-size: 24px;
             font-weight: 600;
             color: {colors.get('foreground', '#0f172a')};
             margin-bottom: 8px;
         }}
 
-        QLabel[class="subheading"] {{
+        QLabel#subheading {{
             font-size: 18px;
             font-weight: 500;
             color: {colors.get('foreground', '#374151')};
@@ -202,14 +200,14 @@ class ShadcnTheme(Theme):
         }}
 
         /* Cards */
-        QFrame[class="card"] {{
+        QFrame#card {{
             background-color: {colors.get('card', '#ffffff')};
             border: 1px solid {colors.get('border', '#e2e8f0')};
             border-radius: 8px;
             padding: 16px;
         }}
 
-        QFrame[class="card"]:hover {{
+        QFrame#card:hover {{
             border-color: {colors.get('border', '#cbd5e1')};
         }}
 
@@ -233,6 +231,7 @@ class ShadcnTheme(Theme):
         /* Checkboxes and Radio buttons */
         QCheckBox, QRadioButton {{
             spacing: 8px;
+            color: {colors.get('foreground', '#0f172a')};
         }}
 
         QCheckBox::indicator, QRadioButton::indicator {{
@@ -250,7 +249,6 @@ class ShadcnTheme(Theme):
         QCheckBox::indicator:checked {{
             background-color: {colors.get('primary', '#0f172a')};
             border-color: {colors.get('primary', '#0f172a')};
-            image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDNMNC41IDguNUwxLjUgNiIgc3Ryb2tlPSJ7Y29sb3JzWydwcmltYXJ5LWZvcmVncm91bmQnXX0iIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==);
         }}
 
         QRadioButton::indicator:checked {{
@@ -266,6 +264,7 @@ class ShadcnTheme(Theme):
             border-radius: 6px;
             padding: 8px 12px;
             min-height: 36px;
+            color: {colors.get('foreground', '#0f172a')};
         }}
 
         QComboBox:hover {{
@@ -283,8 +282,9 @@ class ShadcnTheme(Theme):
         }}
 
         QComboBox::down-arrow {{
-            image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1zbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQgNkw4IDZMMCA2IiBzdHJva2U9InszY29sb3JzWydmb3JlZ3JvdW5kJ119IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPg==);
-            margin-right: 8px;
+            border: none;
+            background: none;
+            color: {colors.get('foreground', '#0f172a')};
         }}
 
         QComboBox QAbstractItemView {{
@@ -321,6 +321,7 @@ class ShadcnTheme(Theme):
             border-radius: 4px;
             text-align: center;
             background-color: {colors.get('background', '#f8fafc')};
+            color: {colors.get('foreground', '#0f172a')};
         }}
 
         QProgressBar::chunk {{

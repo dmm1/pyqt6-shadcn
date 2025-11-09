@@ -180,8 +180,6 @@ class MainWindow(QWidget):
         self.progress_bar = ShadcnProgressBar()
         self.progress_bar.setRange(0, 100)
         self.progress_bar.setValue(50)
-        # Set initial text color for 50% progress
-        self.progress_bar.setStyleSheet("QProgressBar { color: #ffffff; }")
         progress_layout.addWidget(self.progress_bar)
 
         layout.addWidget(progress_group)
@@ -189,9 +187,6 @@ class MainWindow(QWidget):
         # Connect signals
         primary_btn.clicked.connect(self.on_primary_clicked)
         secondary_btn.clicked.connect(self.on_secondary_clicked)
-
-        # Set initial progress bar text color
-        self.update_progress_bar_text_color()
 
     def apply_styles(self):
         # Styles are applied globally via the style manager
@@ -220,22 +215,8 @@ class MainWindow(QWidget):
         from styles import style_manager
 
         style_manager.switch_theme(theme_name)
-        # Update progress bar text color based on new theme
-        self.update_progress_bar_text_color()
         # Refresh styling
         self.refresh_styling()
-
-    def update_progress_bar_text_color(self):
-        """Update progress bar text color based on current theme"""
-        from styles import style_manager
-        from themes.base import ShadcnTheme
-
-        theme = style_manager.get_current_theme()
-        if isinstance(theme, ShadcnTheme):
-            # Get the appropriate text color for progress bars
-            colors = theme.get_colors_for_mode(style_manager.theme_manager.is_dark_mode)
-            text_color = colors.get("foreground", "#0f172a")
-            self.progress_bar.setStyleSheet(f"QProgressBar {{ color: {text_color}; }}")
 
     def on_dark_mode_toggle(self):
         """Toggle dark mode on and off"""
@@ -250,8 +231,6 @@ class MainWindow(QWidget):
         else:
             self.dark_mode_btn.setText("Dark Mode")
 
-        # Update progress bar text color based on new theme
-        self.update_progress_bar_text_color()
         # Refresh styling
         self.refresh_styling()
 

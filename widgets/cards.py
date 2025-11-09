@@ -10,7 +10,7 @@ class ShadcnCard(QFrame):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setProperty("class", "card")
+        self.setObjectName("card")
         self.setFrameStyle(QFrame.Shape.NoFrame)
         self._layout = QVBoxLayout(self)
         self._layout.setContentsMargins(16, 16, 16, 16)
@@ -31,7 +31,7 @@ class ShadcnLabel(QLabel):
     def __init__(self, text, variant="default", parent=None):
         super().__init__(text, parent)
         if variant != "default":
-            self.setProperty("class", variant)
+            self.setObjectName(variant)
 
 
 class HeadingLabel(ShadcnLabel):

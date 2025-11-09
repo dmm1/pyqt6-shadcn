@@ -11,7 +11,7 @@ class ShadcnButton(QPushButton):
 
     def __init__(self, text, variant="default", parent=None):
         super().__init__(text, parent)
-        self.setProperty("class", variant)
+        self.setObjectName(variant)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
 
