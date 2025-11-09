@@ -321,7 +321,8 @@ class ShadcnTheme(Theme):
             border-radius: 4px;
             text-align: center;
             background-color: {colors.get('background', '#f8fafc')};
-            color: {colors.get('foreground', '#0f172a')};
+            color: {colors.get('primary-foreground', '#ffffff')};
+            font-weight: 500;
         }}
 
         QProgressBar::chunk {{

@@ -36,7 +36,8 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Shadcn-inspired PyQt6 GUI")
-        self.setMinimumSize(800, 600)
+        self.setMinimumSize(800, 700)  # Increased minimum height
+        self.resize(900, 800)  # Set a reasonable default size
         self.setObjectName("MainWindow")  # Add object name for specific styling
         self.setup_ui()
         self.apply_styles()

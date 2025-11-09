@@ -13,3 +13,6 @@ class ShadcnProgressBar(QProgressBar):
         self.setRange(0, 100)
         self.setValue(0)
         self.setObjectName("progress")
+        # Ensure text is visible
+        self.setTextVisible(True)
+        self.setFormat("%p%")  # Show percentage
