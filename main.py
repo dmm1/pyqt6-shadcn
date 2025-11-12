@@ -9,13 +9,7 @@ from PyQt6.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QHBoxLayout,
-    QLineEdit,
-    QTextEdit,
     QGroupBox,
-    QCheckBox,
-    QRadioButton,
-    QComboBox,
-    QSlider,
     QPushButton,
     QSizePolicy,
 )
@@ -31,6 +25,12 @@ from widgets import (
     ShadcnCard,
     ShadcnLabel,
     ShadcnProgressBar,
+    ShadcnInput,
+    ShadcnTextArea,
+    ShadcnSelect,
+    ShadcnCheckbox,
+    ShadcnRadioButton,
+    ShadcnSlider,
 )
 
 
@@ -175,10 +175,9 @@ class MainWindow(QWidget):
         # Theme selector
         theme_layout = QHBoxLayout()
         theme_label = ShadcnLabel("Theme:")
-        self.theme_combo = QComboBox()
         from styles import style_manager
 
-        self.theme_combo.addItems(style_manager.get_available_themes())
+        self.theme_combo = ShadcnSelect(style_manager.get_available_themes())
         self.theme_combo.currentTextChanged.connect(self.on_theme_changed)
 
         # Dark mode toggle button
@@ -223,8 +222,7 @@ class MainWindow(QWidget):
         # Input field
         input_layout = QVBoxLayout()
         input_label = ShadcnLabel("Name:")
-        self.name_input = QLineEdit()
-        self.name_input.setPlaceholderText("Enter your name...")
+        self.name_input = ShadcnInput("Enter your name...")
         input_layout.addWidget(input_label)
         input_layout.addWidget(self.name_input)
         form_layout.addLayout(input_layout)
@@ -232,9 +230,7 @@ class MainWindow(QWidget):
         # Text area
         text_layout = QVBoxLayout()
         text_label = ShadcnLabel("Description:")
-        self.description_text = QTextEdit()
-        self.description_text.setPlaceholderText("Enter a description...")
-        self.description_text.setMaximumHeight(80)
+        self.description_text = ShadcnTextArea("Enter a description...")
         text_layout.addWidget(text_label)
         text_layout.addWidget(self.description_text)
         form_layout.addLayout(text_layout)
@@ -242,8 +238,9 @@ class MainWindow(QWidget):
         # Combo box
         combo_layout = QVBoxLayout()
         combo_label = ShadcnLabel("Category:")
-        self.category_combo = QComboBox()
-        self.category_combo.addItems(["Option 1", "Option 2", "Option 3", "Option 4"])
+        self.category_combo = ShadcnSelect(
+            ["Option 1", "Option 2", "Option 3", "Option 4"]
+        )
         combo_layout.addWidget(combo_label)
         combo_layout.addWidget(self.category_combo)
         form_layout.addLayout(combo_layout)
@@ -254,9 +251,9 @@ class MainWindow(QWidget):
         # Checkboxes
         checkbox_group = QVBoxLayout()
         checkbox_group.addWidget(ShadcnLabel("Preferences:"))
-        self.checkbox1 = QCheckBox("Option A")
-        self.checkbox2 = QCheckBox("Option B")
-        self.checkbox3 = QCheckBox("Option C")
+        self.checkbox1 = ShadcnCheckbox("Option A")
+        self.checkbox2 = ShadcnCheckbox("Option B")
+        self.checkbox3 = ShadcnCheckbox("Option C")
         checkbox_group.addWidget(self.checkbox1)
         checkbox_group.addWidget(self.checkbox2)
         checkbox_group.addWidget(self.checkbox3)
@@ -265,9 +262,9 @@ class MainWindow(QWidget):
         # Radio buttons
         radio_group = QVBoxLayout()
         radio_group.addWidget(ShadcnLabel("Choice:"))
-        self.radio1 = QRadioButton("Choice 1")
-        self.radio2 = QRadioButton("Choice 2")
-        self.radio3 = QRadioButton("Choice 3")
+        self.radio1 = ShadcnRadioButton("Choice 1")
+        self.radio2 = ShadcnRadioButton("Choice 2")
+        self.radio3 = ShadcnRadioButton("Choice 3")
         radio_group.addWidget(self.radio1)
         radio_group.addWidget(self.radio2)
         radio_group.addWidget(self.radio3)
@@ -285,7 +282,7 @@ class MainWindow(QWidget):
         # Slider
         slider_layout = QHBoxLayout()
         slider_label = ShadcnLabel("Value:")
-        self.slider = QSlider(Qt.Orientation.Horizontal)
+        self.slider = ShadcnSlider(Qt.Orientation.Horizontal)
         self.slider.setRange(0, 100)
         self.slider.setValue(50)
         self.slider.valueChanged.connect(self.update_progress)

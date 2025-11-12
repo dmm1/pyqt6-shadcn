@@ -185,6 +185,173 @@ class ShadcnTheme(Theme):
             border-color: {colors.get('border', '#cbd5e1')};
         }}
 
+        /* Custom Shadcn Input Widgets */
+        ShadcnInput, QLineEdit#shadcn_input {{
+            background-color: {colors.get('background', '#ffffff')};
+            border: 1px solid {colors.get('border', '#e2e8f0')};
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: {colors.get('foreground', '#0f172a')};
+            selection-background-color: {colors.get('primary', '#0f172a')};
+            selection-color: {colors.get('primary-foreground', '#ffffff')};
+        }}
+
+        ShadcnInput:focus, QLineEdit#shadcn_input:focus {{
+            border-color: {colors.get('ring', '#3b82f6')};
+            outline: none;
+        }}
+
+        ShadcnInput:hover, QLineEdit#shadcn_input:hover {{
+            border-color: {colors.get('border', '#cbd5e1')};
+        }}
+
+        ShadcnTextArea, QTextEdit#shadcn_textarea {{
+            background-color: {colors.get('background', '#ffffff')};
+            border: 1px solid {colors.get('border', '#e2e8f0')};
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: {colors.get('foreground', '#0f172a')};
+            selection-background-color: {colors.get('primary', '#0f172a')};
+            selection-color: {colors.get('primary-foreground', '#ffffff')};
+        }}
+
+        ShadcnTextArea:focus, QTextEdit#shadcn_textarea:focus {{
+            border-color: {colors.get('ring', '#3b82f6')};
+            outline: none;
+        }}
+
+        ShadcnTextArea:hover, QTextEdit#shadcn_textarea:hover {{
+            border-color: {colors.get('border', '#cbd5e1')};
+        }}
+
+        ShadcnSelect, QComboBox#shadcn_select {{
+            background-color: {colors.get('background', '#ffffff')};
+            border: 1px solid {colors.get('border', '#e2e8f0')};
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: {colors.get('foreground', '#0f172a')};
+            min-height: 40px;
+        }}
+
+        ShadcnSelect:hover, QComboBox#shadcn_select:hover {{
+            border-color: {colors.get('border', '#cbd5e1')};
+        }}
+
+        ShadcnSelect:focus, QComboBox#shadcn_select:focus {{
+            border-color: {colors.get('ring', '#3b82f6')};
+            outline: none;
+        }}
+
+        ShadcnSelect::drop-down, QComboBox#shadcn_select::drop-down {{
+            border: none;
+            width: 30px;
+        }}
+
+        ShadcnSelect::down-arrow, QComboBox#shadcn_select::down-arrow {{
+            border: none;
+            background: none;
+            color: {colors.get('muted-foreground', '#64748b')};
+            width: 12px;
+            height: 12px;
+        }}
+
+        ShadcnSelect QAbstractItemView, QComboBox#shadcn_select QAbstractItemView {{
+            background-color: {colors.get('background', '#ffffff')};
+            border: 1px solid {colors.get('border', '#e2e8f0')};
+            border-radius: 6px;
+            selection-background-color: {colors.get('muted', '#f1f5f9')};
+            selection-color: {colors.get('foreground', '#0f172a')};
+        }}
+
+        ShadcnCheckbox, QCheckBox#shadcn_checkbox {{
+            spacing: 8px;
+            color: {colors.get('foreground', '#0f172a')};
+            font-size: 14px;
+        }}
+
+        ShadcnCheckbox::indicator, QCheckBox#shadcn_checkbox::indicator {{
+            width: 18px;
+            height: 18px;
+            border: 2px solid {colors.get('border', '#d1d5db')};
+            border-radius: 4px;
+            background-color: {colors.get('background', '#ffffff')};
+        }}
+
+        ShadcnCheckbox::indicator:hover, QCheckBox#shadcn_checkbox::indicator:hover {{
+            border-color: {colors.get('muted-foreground', '#9ca3af')};
+        }}
+
+        ShadcnCheckbox::indicator:checked, QCheckBox#shadcn_checkbox::indicator:checked {{
+            background-color: {colors.get('primary', '#0f172a')};
+            border-color: {colors.get('primary', '#0f172a')};
+            image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 0 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
+        }}
+
+        ShadcnRadioButton, QRadioButton#shadcn_radio {{
+            spacing: 8px;
+            color: {colors.get('foreground', '#0f172a')};
+            font-size: 14px;
+        }}
+
+        ShadcnRadioButton::indicator, QRadioButton#shadcn_radio::indicator {{
+            width: 18px;
+            height: 18px;
+            border: 2px solid {colors.get('border', '#d1d5db')};
+            border-radius: 9px;
+            background-color: {colors.get('background', '#ffffff')};
+        }}
+
+        ShadcnRadioButton::indicator:hover, QRadioButton#shadcn_radio::indicator:hover {{
+            border-color: {colors.get('muted-foreground', '#9ca3af')};
+        }}
+
+        ShadcnRadioButton::indicator:checked, QRadioButton#shadcn_radio::indicator:checked {{
+            background-color: {colors.get('primary', '#0f172a')};
+            border-color: {colors.get('primary', '#0f172a')};
+            image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }}
+
+        ShadcnSlider, QSlider#shadcn_slider {{
+            background-color: transparent;
+        }}
+
+        ShadcnSlider::groove:horizontal, QSlider#shadcn_slider::groove:horizontal {{
+            height: 6px;
+            background-color: {colors.get('border', '#e2e8f0')};
+            border-radius: 3px;
+        }}
+
+        ShadcnSlider::handle:horizontal, QSlider#shadcn_slider::handle:horizontal {{
+            background-color: {colors.get('primary', '#0f172a')};
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            margin: -7px 0;
+        }}
+
+        ShadcnSlider::handle:horizontal:hover, QSlider#shadcn_slider::handle:horizontal:hover {{
+            background-color: {colors.get('primary', '#1e293b')};
+        }}
+
+        ShadcnSlider::handle:horizontal:pressed, QSlider#shadcn_slider::handle:horizontal:pressed {{
+            background-color: {colors.get('primary', '#334155')};
+        }}
+
+        QLabel#shadcn_label {{
+            color: {colors.get('foreground', '#374151')};
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }}
+
+        QWidget#shadcn_form_field {{
+            background-color: transparent;
+        }}
+
         /* Labels */
         QLabel {{
             color: {colors.get('foreground', '#374151')};

@@ -11,6 +11,15 @@ from .buttons import (
 )
 from .cards import ShadcnCard, ShadcnLabel, HeadingLabel, SubheadingLabel
 from .progress import ShadcnProgressBar
+from .inputs import (
+    ShadcnInput,
+    ShadcnTextArea,
+    ShadcnSelect,
+    ShadcnCheckbox,
+    ShadcnRadioButton,
+    ShadcnSlider,
+    ShadcnFormField,
+)
 
 __all__ = [
     "ShadcnButton",
@@ -23,4 +32,11 @@ __all__ = [
     "HeadingLabel",
     "SubheadingLabel",
     "ShadcnProgressBar",
+    "ShadcnInput",
+    "ShadcnTextArea",
+    "ShadcnSelect",
+    "ShadcnCheckbox",
+    "ShadcnRadioButton",
+    "ShadcnSlider",
+    "ShadcnFormField",
 ]
