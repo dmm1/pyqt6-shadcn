@@ -371,25 +371,48 @@ class ShadcnTheme(Theme):
         QPushButton#title_bar_button {{
             background-color: transparent;
             border: none;
-            color: {colors.get('foreground', '#0f172a')};
-            font-size: 14px;
+            color: {colors.get('muted-foreground', '#64748b')};
+            font-size: 16px;
             font-weight: bold;
+            border-radius: 4px;
+            padding: 2px;
         }}
 
         QPushButton#title_bar_button:hover {{
+            background-color: {colors.get('muted', '#f1f5f9')};
+            color: {colors.get('foreground', '#0f172a')};
+        }}
+
+        QPushButton#title_bar_button:pressed {{
+            background-color: {colors.get('border', '#e2e8f0')};
+        }}
+
+        QPushButton#title_bar_button:focus {{
+            outline: none;
             background-color: {colors.get('muted', '#f1f5f9')};
         }}
 
         QPushButton#close_button {{
             background-color: transparent;
             border: none;
-            color: {colors.get('foreground', '#0f172a')};
-            font-size: 14px;
+            color: {colors.get('muted-foreground', '#64748b')};
+            font-size: 16px;
             font-weight: bold;
+            border-radius: 4px;
+            padding: 2px;
         }}
 
         QPushButton#close_button:hover {{
             background-color: {colors.get('destructive', '#ef4444')};
             color: {colors.get('destructive-foreground', '#ffffff')};
+        }}
+
+        QPushButton#close_button:pressed {{
+            background-color: {colors.get('destructive', '#dc2626')};
+        }}
+
+        QPushButton#close_button:focus {{
+            outline: none;
+            background-color: {colors.get('muted', '#f1f5f9')};
         }}
         """

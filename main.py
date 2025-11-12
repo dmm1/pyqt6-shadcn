@@ -19,7 +19,7 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QSizePolicy,
 )
-from PyQt6.QtCore import Qt, QPoint
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 
 # Import our modular components
@@ -47,8 +47,13 @@ class CustomTitleBar(QWidget):
 
     def setup_ui(self):
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 0, 12, 0)
-        layout.setSpacing(8)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+
+        # Create inner layout with padding
+        inner_layout = QHBoxLayout()
+        inner_layout.setContentsMargins(12, 0, 12, 0)
+        inner_layout.setSpacing(8)
 
         # Window title
         self.title_label = ShadcnLabel("Shadcn-inspired PyQt6 GUI", "heading")
@@ -62,19 +67,19 @@ class CustomTitleBar(QWidget):
         controls_layout.setSpacing(0)
 
         # Minimize button
-        self.minimize_btn = QPushButton("—")
+        self.minimize_btn = QPushButton("─")
         self.minimize_btn.setFixedSize(40, 30)
         self.minimize_btn.setObjectName("title_bar_button")
         self.minimize_btn.clicked.connect(self.minimize_window)
 
         # Maximize button
-        self.maximize_btn = QPushButton("⬜")
+        self.maximize_btn = QPushButton("□")
         self.maximize_btn.setFixedSize(40, 30)
         self.maximize_btn.setObjectName("title_bar_button")
         self.maximize_btn.clicked.connect(self.toggle_maximize)
 
         # Close button
-        self.close_btn = QPushButton("✕")
+        self.close_btn = QPushButton("×")
         self.close_btn.setFixedSize(40, 30)
         self.close_btn.setObjectName("close_button")
         self.close_btn.clicked.connect(self.close_window)
@@ -83,8 +88,10 @@ class CustomTitleBar(QWidget):
         controls_layout.addWidget(self.maximize_btn)
         controls_layout.addWidget(self.close_btn)
 
-        layout.addWidget(self.title_label)
-        layout.addLayout(controls_layout)
+        inner_layout.addWidget(self.title_label)
+        inner_layout.addLayout(controls_layout)
+
+        layout.addLayout(inner_layout)
 
     def minimize_window(self):
         if self.parent_window:
@@ -94,7 +101,7 @@ class CustomTitleBar(QWidget):
         if self.parent_window:
             if self.parent_window.isMaximized():
                 self.parent_window.showNormal()
-                self.maximize_btn.setText("⬜")
+                self.maximize_btn.setText("□")
             else:
                 self.parent_window.showMaximized()
                 self.maximize_btn.setText("❐")
